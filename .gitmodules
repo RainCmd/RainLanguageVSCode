@@ -1,0 +1,3 @@
+[submodule "RainLanguageServer"]
+	path = RainLanguageServer
+	url = https://github.com/RainCmd/RainLanguageServer.git
