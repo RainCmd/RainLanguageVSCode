@@ -8,7 +8,7 @@ import * as rainLanguageClient from "./LanguageClinet";
 import { RainEvaluatableExpressionProvider } from "./EvaluatableExpressionProvider";
 import { SemanticTokenProvider, legend } from "./SemanticTokenProvider";
 
-export const extensionDebug = false
+export const extensionDebug = true
 export let kernelStateViewProvider: KernelStateViewProvider;
 
 export async function activate(context: vscode.ExtensionContext) {

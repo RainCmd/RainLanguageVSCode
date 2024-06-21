@@ -69,7 +69,6 @@ function GetSocketServerOperation() {
 }
 
 export async function StartServer(context: vscode.ExtensionContext) {
-
     const serverOptions = extensionDebug ? GetSocketServerOperation : GetCPServerOptions(context)
     
     const projectName = await GetProjectName()

@@ -4,5 +4,11 @@
         "node_modules":true,
         "RainLanguageServer/**/bin":true,
         "RainLanguageServer/**/obj":true
+    },
+    "search.exclude": {
+        "out":true,
+        "node_modules":true,
+        "RainLanguageServer/**/bin":true,
+        "RainLanguageServer/**/obj":true
     }
 }

@@ -1,17 +1,22 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "编译",
             "type": "npm",
-            "script": "watch",
-            "problemMatcher":"$tsc-watch",
-            "isBackground": true,
-			"presentation": {
-				"reveal": "never"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
+            "script": "编译",
+            "problemMatcher":[]
+        },
+        {
+            "label": "打包",
+            "type": "npm",
+            "script": "打包",
+            "problemMatcher":[]
+        },
+        {
+            "label": "编译并打包",
+            "type": "shell",
+            "dependsOn":["编译","打包"]
         }
     ]
 }
