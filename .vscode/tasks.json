@@ -6,17 +6,6 @@
             "type": "npm",
             "script": "编译",
             "problemMatcher":[]
-        },
-        {
-            "label": "打包",
-            "type": "npm",
-            "script": "打包",
-            "problemMatcher":[]
-        },
-        {
-            "label": "编译并打包",
-            "type": "shell",
-            "dependsOn":["编译","打包"]
         }
     ]
 }
