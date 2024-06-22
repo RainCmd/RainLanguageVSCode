@@ -252,7 +252,7 @@ export class RainDebugSession extends LoggingDebugSession {
 		this.sendResponse(response)
 	}
 	protected disconnectRequest(response: DebugProtocol.DisconnectResponse, args: DebugProtocol.DisconnectArguments, request?: DebugProtocol.Request): void {
-		RainDebug.client.destroy();
+		RainDebug.client.end(() => RainDebug.client.destroy())
 		if (this.configuration.request == 'launch' && RainDebug.debuggedProcess != null && !RainDebug.debuggedProcess.killed) {
 			RainDebug.debuggedProcess.kill()
 		}
