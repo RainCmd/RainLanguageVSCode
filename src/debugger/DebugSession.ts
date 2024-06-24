@@ -331,8 +331,7 @@ export class RainDebugSession extends LoggingDebugSession {
 			}
 			this.sendResponse(response);
 		}).catch(reason => {
-			//运行时无法获取task列表，但是如果threads为空pauseRequest就不会生效
-			response.body = { threads: [{ id: 0, name: "" }] }
+			response.success = false
 			this.sendResponse(response);
 		})
 	}
