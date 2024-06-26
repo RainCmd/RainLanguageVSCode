@@ -26,6 +26,7 @@ export enum Proto {
 	RECV_RemoveBreaks,
 	RECV_ClearBreaks,
 
+    //  uint64 taskId
 	RECV_Pause,
 	//	bool	igonreStep
 	RECV_Continue,
@@ -33,12 +34,8 @@ export enum Proto {
 	RECV_Step,
 
 	//	string	message
-	//	uint32	taskCount
-	//		uint64	taskId
 	//	uint64	currentTask
 	SEND_OnException,
-	//	uint32	taskCount
-	//		uint64	taskId
 	//	uint64	currentTask
 	SEND_OnBreak,
 

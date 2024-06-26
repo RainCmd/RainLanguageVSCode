@@ -100,19 +100,11 @@ export class RainDebugSession extends LoggingDebugSession {
 			this.sendEvent(new InitializedEvent())
 			this.InitStateView()
 		}).on(client.Proto.SEND_OnBreak, reader => {
-			let taskCount = reader.ReadInt()
-			while (taskCount-- > 0) {
-				this.sendEvent(new StoppedEvent("", Number(reader.ReadLong())))
-			}
 			const threadId = Number(reader.ReadLong())
 			this.sendEvent(new StoppedEvent("命中断点", threadId));
 		}).on(client.Proto.SEND_OnException, reader => {
 			const msg = reader.ReadString()
 			if (this.exitBreakCondition == null || this.exitBreakCondition.test(msg)) {
-				let taskCount = reader.ReadInt()
-				while (taskCount-- > 0) {
-					this.sendEvent(new StoppedEvent("", Number(reader.ReadLong())))
-				}
 				const threadId = Number(reader.ReadLong())
 				this.sendEvent(new StoppedEvent("exception", threadId, msg));
 			} else {
@@ -645,7 +637,9 @@ export class RainDebugSession extends LoggingDebugSession {
 	}
 
 	protected pauseRequest(response: DebugProtocol.PauseResponse, args: DebugProtocol.PauseArguments, request?: DebugProtocol.Request): void {
-		this.helper.Send(new client.Writer(client.Proto.RECV_Pause))
+		const writer = new client.Writer(client.Proto.RECV_Pause)
+		writer.WriteLong(BigInt(args.threadId))
+		this.helper.Send(writer)
 		this.sendResponse(response)
 	}
 	protected continueRequest(response: DebugProtocol.ContinueResponse, args: DebugProtocol.ContinueArguments, request?: DebugProtocol.Request): void {
