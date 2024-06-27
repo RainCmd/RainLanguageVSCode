@@ -84,6 +84,7 @@ export enum Proto {
 	//	uint32	requestId
 	//	uint32	taskCount
 	//		uint64	taskId
+    //      string  taskName
 	RSEND_Tasks,
 	//	uint32	requestId
 	//	uint64	taskId

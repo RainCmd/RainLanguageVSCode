@@ -309,16 +309,20 @@ export class RainDebugSession extends LoggingDebugSession {
 		this.traceMap.clear()
 		this.spaceMap.clear()
 		this.variableMap.clear()
-		let req = new client.Writer(client.Proto.RRECV_Tasks)
+		const req = new client.Writer(client.Proto.RRECV_Tasks)
 		req.WriteUint(request.seq)
 		this.helper.Request(request.seq, req).then(res => {
 			let cnt = res.ReadInt()
 			response.body = { threads: [] }
 			while (cnt-- > 0) {
-				let id = Number(res.ReadLong())
+				const id = Number(res.ReadLong())
+				let name = res.ReadString()
+				if (name == "") {
+					name = "TaskID:" + id.toString()
+				}
 				response.body.threads.push({
 					id: id,
-					name: "TaskID:" + id.toString()
+					name: name
 				})
 			}
 			this.sendResponse(response);
