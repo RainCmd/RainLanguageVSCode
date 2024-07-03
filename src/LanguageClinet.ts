@@ -3,7 +3,7 @@ import { LanguageClient, LanguageClientOptions, ServerOptions, StreamInfo } from
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as net from 'net'
-import { RegistRainLanguagePreviewDoc, extensionDebug } from './extension';
+import { RegistRainLanguagePreviewDoc, extensionDebug, kernelFileName, rainLanguageDocScheme } from './extension';
 
 let client: LanguageClient;
 
@@ -35,7 +35,9 @@ async function CollectImports(): Promise<string[]> {
 }
 async function LoadRely(rely: string): Promise<string> {
     //todo 参数rely是CollectImports传给服务的内容，返回类似kernel.rain的字符串内容
-    return ""
+    let result = ""
+    RegistRainLanguagePreviewDoc(`${rainLanguageDocScheme}:${rely}.rain`, result)
+    return result
 }
 
 function GetCPServerOptions(context: vscode.ExtensionContext): ServerOptions {
@@ -81,15 +83,12 @@ export async function StartServer(context: vscode.ExtensionContext) {
             fileEvents: vscode.workspace.createFileSystemWatcher("**/*.rain")
         },
         initializationOptions: {
-            kernelDefinePath: `${context.extension.extensionUri.fsPath}/kernel.rain`,
+            kernelDefinePath: `${context.extension.extensionUri.fsPath}/${kernelFileName}`,
             projectName: projectName,
             imports: imports
         }
     }
     client = new LanguageClient("雨言", "雨言服务客户端", serverOptions, clientOptions)
-    client.onNotification("rainlanguage/regPreviewDoc", doc => {
-        RegistRainLanguagePreviewDoc(doc.path, doc.content)
-    })
     client.onRequest("rainlanguage/loadRely", LoadRely)
     client.start().then(() => {
         console.log("雨言服务客户端：启动")

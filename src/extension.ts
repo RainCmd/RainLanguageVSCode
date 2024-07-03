@@ -10,6 +10,8 @@ import { SemanticTokenProvider, legend } from "./SemanticTokenProvider";
 
 export const extensionDebug = false
 export let kernelStateViewProvider: KernelStateViewProvider;
+export const kernelFileName = "kernel.rain"
+export const rainLanguageDocScheme = "rain-language"
 
 export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.executeCommand("setContext", "extensionDebug", extensionDebug)
@@ -45,18 +47,9 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.registerWebviewViewProvider("RainKernelState", kernelStateViewProvider),
 
         vscode.commands.registerCommand('cmd.核心库定义', async () => {
-            const path = "kernel.rain"
-            const filePath = context.extensionPath + "/" + path;
-            readFile(filePath, (error, data) => {
-                if (error) {
-                    console.log(error)
-                } else {
-                    RegistRainLanguagePreviewDoc(path, data.toString())
-                    vscode.window.showTextDocument(vscode.Uri.parse("rain-language:" + path))
-                }
-            })
+            vscode.window.showTextDocument(vscode.Uri.parse(`${rainLanguageDocScheme}:${kernelFileName}`))
         }),
-        vscode.workspace.registerTextDocumentContentProvider("rain-language", {
+        vscode.workspace.registerTextDocumentContentProvider(rainLanguageDocScheme, {
             provideTextDocumentContent: function (uri: vscode.Uri) { return langugaePreviewDoc.get(uri.path) } 
         }),
 
@@ -64,6 +57,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
         vscode.languages.registerDocumentSemanticTokensProvider(documentSelector,new SemanticTokenProvider(), legend)
     );
+
+    readFile(context.extensionPath + "/" + kernelFileName, (error, data) => {
+        if (error) {
+            console.log(error)
+        } else {
+            RegistRainLanguagePreviewDoc(`${rainLanguageDocScheme}:${kernelFileName}`, data.toString())
+        }
+    })
     await rainLanguageClient.StartServer(context);
 }
 export async function deactivate() {
@@ -73,6 +74,6 @@ export async function deactivate() {
 const langugaePreviewDoc = new Map<string, string>()
 export function RegistRainLanguagePreviewDoc(path: string, content: string) {
     const uri = vscode.Uri.parse(path)
-    if (uri.scheme == "rain-language")
+    if (uri.scheme == rainLanguageDocScheme)
         langugaePreviewDoc.set(uri.path, content)
 }
