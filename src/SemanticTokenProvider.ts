@@ -2,7 +2,8 @@
 import * as vscode from 'vscode'
 import { GetSemanticTokens } from './LanguageClinet'
 
-const tokenTypes = ['namespace', 'type', 'enum', 'struct', 'class', 'interface', 'function', 'method', 'enumMember', 'variable', 'parameter', 'enumMember', 'operator']
+//https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
+const tokenTypes = ['namespace', 'type', 'enum', 'enumMember', 'struct', 'class', 'interface', 'function', 'method', 'macro', 'variable', 'parameter', 'operator', "number", "keyword", "label"]
 export const legend = new vscode.SemanticTokensLegend(tokenTypes)
 interface TokenType{
     type: number

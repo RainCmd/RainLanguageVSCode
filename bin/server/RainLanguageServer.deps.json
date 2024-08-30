@@ -10,7 +10,7 @@
         "dependencies": {
           "LanguageServerProtocol": "1.0.0",
           "Microsoft.DotNet.ILCompiler": "8.0.6",
-          "Microsoft.NET.ILLink.Tasks": "8.0.6"
+          "Microsoft.NET.ILLink.Tasks": "8.0.8"
         },
         "runtime": {
           "RainLanguageServer.dll": {}
@@ -25,7 +25,7 @@
         }
       },
       "Microsoft.DotNet.ILCompiler/8.0.6": {},
-      "Microsoft.NET.ILLink.Tasks/8.0.6": {},
+      "Microsoft.NET.ILLink.Tasks/8.0.8": {},
       "Newtonsoft.Json/13.0.3": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -65,12 +65,12 @@
       "path": "microsoft.dotnet.ilcompiler/8.0.6",
       "hashPath": "microsoft.dotnet.ilcompiler.8.0.6.nupkg.sha512"
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.6": {
+    "Microsoft.NET.ILLink.Tasks/8.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-E+lDylsTeP4ZiDmnEkiJ5wobnGaIJzFhOgZppznJCb69UZgbh6G3cfv1pnLDLLBx6JAgl0kAlnINDeT3uCuczQ==",
-      "path": "microsoft.net.illink.tasks/8.0.6",
-      "hashPath": "microsoft.net.illink.tasks.8.0.6.nupkg.sha512"
+      "sha512": "sha512-P8wR6MUWwYXIjPJuBaZgo5zlI/GWI6QEAo6NyVIbPefa9CCkohYu7dP2rD/mrqnjEqfRHyl+h9VZrDoGpELqYg==",
+      "path": "microsoft.net.illink.tasks/8.0.8",
+      "hashPath": "microsoft.net.illink.tasks.8.0.8.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
