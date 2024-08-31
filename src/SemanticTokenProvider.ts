@@ -3,10 +3,15 @@ import * as vscode from 'vscode'
 import { GetSemanticTokens } from './LanguageClinet'
 
 //https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
-const tokenTypes = ['namespace', 'type', 'enum', 'enumMember', 'struct', 'class', 'interface', 'function', 'method', 'macro', 'variable', 'parameter', 'operator', "number", "keyword", "label"]
-export const legend = new vscode.SemanticTokensLegend(tokenTypes)
+const tokenTypes =
+        ['namespace', 'class', 'enum', 'interface', 'struct', 'typeParameter', 'type', 'parameter', 'variable', 'property',
+        'enumMember', 'decorator', 'event', 'function', 'method', 'macro', 'label', 'comment', 'string', 'keyword',
+        'number', 'regexp', 'operator']
+const tokenModifiers = ['declaration', 'definition', 'readonly', 'static', 'deprecated', 'abstract', 'async', 'modification', 'documentation', 'defaultLibrary']
+export const legend = new vscode.SemanticTokensLegend(tokenTypes, tokenModifiers)
 interface TokenType{
     type: number
+    modifier: number
     ranges: TokenRange[]
 }
 interface TokenRange{
@@ -21,7 +26,7 @@ export class SemanticTokenProvider implements vscode.DocumentSemanticTokensProvi
         if (tokens) {
             tokens.forEach((type: TokenType) => {
                 type.ranges.forEach(element => {
-                    builder.push(element.line, element.index, element.length, type.type)
+                    builder.push(element.line, element.index, element.length, type.type, type.modifier)
                 });
             });
         }

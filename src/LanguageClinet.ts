@@ -43,8 +43,6 @@ async function LoadRely(rely: string): Promise<string> {
 function GetCPServerOptions(context: vscode.ExtensionContext): ServerOptions {
     const binPath = `${context.extension.extensionUri.fsPath}/bin/`
     let serverArgs: string[] = []
-    serverArgs.push('-logPath')
-    serverArgs.push(`${binPath}server.log`)
     
     return {
         command: `${binPath}server/RainLanguageServer.exe`,
