@@ -50,12 +50,12 @@ export async function activate(context: vscode.ExtensionContext) {
             vscode.window.showTextDocument(vscode.Uri.parse(`${rainLanguageDocScheme}:${kernelFileName}`))
         }),
         vscode.workspace.registerTextDocumentContentProvider(rainLanguageDocScheme, {
-            provideTextDocumentContent: function (uri: vscode.Uri) { return langugaePreviewDoc.get(uri.path) } 
+            provideTextDocumentContent: function (uri: vscode.Uri) { return langugaePreviewDoc.get(uri.path) }
         }),
 
         vscode.commands.registerCommand('cmd.debug.重启雨言服务', () => rainLanguageClient.RestartServer(context)),
 
-        vscode.languages.registerDocumentSemanticTokensProvider(documentSelector,new SemanticTokenProvider(), legend)
+        vscode.languages.registerDocumentSemanticTokensProvider(documentSelector, new SemanticTokenProvider(), legend)
     );
 
     readFile(context.extensionPath + "/" + kernelFileName, (error, data) => {
