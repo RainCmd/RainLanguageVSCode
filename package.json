@@ -37,7 +37,7 @@
     "dependencies": {
         "iconv-lite": "^0.6.3",
         "@vscode/debugadapter": "^1.61.0",
-		"vscode-languageclient": "^9.0.1"
+        "vscode-languageclient": "^9.0.1"
     },
     "contributes": {
         "languages": [
@@ -112,6 +112,22 @@
         ],
         "debuggers": [
             {
+                "configurationSnippets": [
+                    {
+                        "label": "RainLanguage: 调试运行",
+                        "description": "一个可以调试运行RainLanguage的启动配置",
+                        "body": {
+                            "name": "雨言调试运行",
+                            "request": "launch",
+                            "type": "雨言调试运行",
+                            "EntryPoint": "Main",
+                            "ErrorLevel": 4,
+                            "Fixed": false,
+                            "ProjectName": "RainTest",
+                            "Timestep": 100
+                        }
+                    }
+                ],
                 "type": "雨言调试运行",
                 "label": "直接运行并调试",
                 "configurationAttributes": {
@@ -144,7 +160,7 @@
                                 "description": "警告日志输出等级，最高8级",
                                 "default": 4
                             },
-                            "Fixed":{
+                            "Fixed": {
                                 "type": "boolean",
                                 "description": "使用定点数计算",
                                 "default": false
@@ -154,6 +170,19 @@
                 }
             },
             {
+                "configurationSnippets": [
+                    {
+                        "label": "RainLanguage: 附加到进程",
+                        "description": "对运行在其他进程的虚拟机进行调试的配置",
+                        "body": {
+                            "name": "雨言附加到进程",
+                            "request": "attach",
+                            "type": "雨言附加到进程",
+                            "ProjectName": "RainTest",
+                            "Fixed": false
+                        }
+                    }
+                ],
                 "type": "雨言附加到进程",
                 "label": "附加到其他进程，对进程中运行的雨言进行调试",
                 "configurationAttributes": {
@@ -168,7 +197,7 @@
                                 "description": "程序集名",
                                 "default": "RainTest"
                             },
-                            "Fixed":{
+                            "Fixed": {
                                 "type": "boolean",
                                 "description": "使用定点数计算",
                                 "default": false
@@ -186,7 +215,7 @@
             }
         ],
         "views": {
-            "debug":[
+            "debug": [
                 {
                     "id": "RainKernelState",
                     "name": "虚拟机状态视图",
