@@ -1,7 +1,7 @@
 {
     "name": "rain-language",
     "displayName": "雨言",
-    "description": "对雨言提供关键字高亮，代码片段完成，代码格式化和远程调试等功能",
+    "description": "对雨言提供语言服务和调试功能",
     "version": "2.0.0",
     "publisher": "RainCmd",
     "engines": {
