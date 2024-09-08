@@ -14,12 +14,21 @@
         "Formatters",
         "Debuggers"
     ],
+    "keywords": [
+        "RainLanguage",
+        "debugg",
+        "languageserver"  
+    ],
     "activationEvents": [
         "onDebug"
     ],
+    "homepage": "https://github.com/RainCmd/RainLanguagePlugin",
     "repository": {
         "type": "git",
-        "url": "https://github.com/RainCmd/RainLanguage.git"
+        "url": "https://github.com/RainCmd/RainLanguagePlugin.git"
+    },
+    "bugs": {
+        "url": "https://github.com/RainCmd/RainLanguagePlugin/issues"
     },
     "main": "./out/extension.js",
     "scripts": {
