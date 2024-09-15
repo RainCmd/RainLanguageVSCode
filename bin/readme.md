@@ -2,6 +2,7 @@
 <div align="center">
 
 # 雨言
+简体中文 | [English](./readme_en.md)
 
 </div>
 
