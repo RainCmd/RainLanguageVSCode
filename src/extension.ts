@@ -10,7 +10,7 @@ import { SemanticTokenProvider, legend } from "./SemanticTokenProvider";
 
 export const extensionDebug = false
 export let kernelStateViewProvider: KernelStateViewProvider;
-export const kernelFileName = "kernel.rain"
+export const kernelFileName = "kernel"
 export const rainLanguageDocScheme = "rain-language"
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -47,7 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.registerWebviewViewProvider("RainKernelState", kernelStateViewProvider),
 
         vscode.commands.registerCommand('cmd.核心库定义', async () => {
-            vscode.window.showTextDocument(vscode.Uri.parse(`${rainLanguageDocScheme}:${kernelFileName}`))
+            vscode.window.showTextDocument(vscode.Uri.parse(`${rainLanguageDocScheme}:${kernelFileName}.rain`))
         }),
         vscode.workspace.registerTextDocumentContentProvider(rainLanguageDocScheme, {
             provideTextDocumentContent: function (uri: vscode.Uri) { return langugaePreviewDoc.get(uri.path) }
@@ -62,7 +62,7 @@ export async function activate(context: vscode.ExtensionContext) {
         if (error) {
             console.log(error)
         } else {
-            RegistRainLanguagePreviewDoc(`${rainLanguageDocScheme}:${kernelFileName}`, data.toString())
+            RegistRainLanguagePreviewDoc(`${rainLanguageDocScheme}:${kernelFileName}.rain`, data.toString())
         }
     })
     await rainLanguageClient.StartServer(context);

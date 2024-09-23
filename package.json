@@ -2,7 +2,7 @@
     "name": "rain-language",
     "displayName": "雨言",
     "description": "对雨言提供语言服务和调试功能",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "publisher": "RainCmd",
     "engines": {
         "vscode": "^1.28.0"
