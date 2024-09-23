@@ -3,7 +3,7 @@
 
 简体中文 | [English](./readme_en.md)
 
-![GitHub Release](https://img.shields.io/github/v/release/RainCmd/RainLanguageVSCode)[![GitHub Code License](https://img.shields.io/github/license/RainCmd/RainLanguageVSCode)](LICENSE)[![语言服务仓库](https://img.shields.io/badge/仓库-语言服务-cyan)](https://github.com/RainCmd/RainLanguageServer)[![LSP协议仓库](https://img.shields.io/badge/工具-LSP协议-pink)](https://github.com/RainCmd/LanguageServerProtocol)[![雨言介绍](https://img.shields.io/badge/RainLanguage-smoke)](https://github.com/RainCmd/Language)
+![GitHub Release](https://img.shields.io/github/v/release/RainCmd/RainLanguageVSCode)[![GitHub Code License](https://img.shields.io/github/license/RainCmd/RainLanguageVSCode)](LICENSE)[![语言服务仓库](https://img.shields.io/badge/仓库-语言服务-cyan)](https://github.com/RainCmd/RainLanguageServer)[![LSP协议仓库](https://img.shields.io/badge/工具-LSP协议-pink)](https://github.com/RainCmd/LanguageServerProtocol)[![雨言介绍](https://img.shields.io/badge/RainLanguage-smoke)](https://github.com/RainCmd/RainLanguage)
 
 </div>
 
