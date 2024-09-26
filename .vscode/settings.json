@@ -3,12 +3,14 @@
         "out":true,
         "node_modules":true,
         "RainLanguageServer/**/bin":true,
-        "RainLanguageServer/**/obj":true
+        "RainLanguageServer/**/obj":true,
+        "RainLanguage/**/x64":true
     },
     "search.exclude": {
         "out":true,
         "node_modules":true,
         "RainLanguageServer/**/bin":true,
-        "RainLanguageServer/**/obj":true
+        "RainLanguageServer/**/obj":true,
+        "RainLanguage/**/x64":true
     }
 }

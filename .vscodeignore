@@ -4,4 +4,5 @@ test/
 .gitignore
 out/**/*.map
 tsconfig.json
-*/**/*.log
+RainLanguage/
+RainLanguageServer/
