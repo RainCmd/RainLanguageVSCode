@@ -1,0 +1,71 @@
+name: 打包
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: 拉取仓库
+      uses: actions/checkout@v4
+    - name: 安装MSBuild
+      uses: microsoft/setup-msbuild@v2
+    - name: 构建RL rls real
+      run: msbuild .\RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      
+    - name: 构建RL rls fixed
+      if: success()
+      run: msbuild .\RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+      
+    - name: 构建RLDectector rls real
+      if: success()
+      run: msbuild .\RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      
+    - name: 构建RLDectector rls fixed
+      if: success()
+      run: msbuild .\RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+      
+    - name: 构建RLLauncher rls real
+      if: success()
+      run: msbuild .\RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      
+    - name: 构建RLLauncher rls fixed
+      if: success()
+      run: msbuild .\RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+      
+    - name: 构建RLInjector rls
+      if: success()
+      run: msbuild .\RainLanguage\RainDebuggerInjector\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      
+    - name: 构建RL arm android-19 rls
+      if: success()
+      run: msbuild .\RainLanguage\RainLanguageSO\RainLanguageSO.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+    
+    - name: 构建RLServer rls
+      if: success()
+      run: msbuild .\RainLanguageServer\RainLanguageServer\RainLanguageServer.csproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=AnyCPU
+    
+    - name: 安装Node.js
+      if: success()
+      uses: actions/setup-node@v4
+      with:
+        node-version: '>=17.0.21'
+    - name: 安装依赖
+      if: success()
+      run: npm install
+    - name: 编译
+      if: success()
+      run: npm run tsc -b
+    - name: 打包
+      if: success()
+      run: npm run vsce package
+    - name: 上传vscode扩展包
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: RLVSCode扩展包
+        path:
+          rain-language-1.0.0.vsix
+      
+      
+    
