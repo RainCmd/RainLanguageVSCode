@@ -9,7 +9,7 @@ jobs:
     - name: 拉取仓库
       uses: actions/checkout@v4
       with:
-        submodules: true
+        submodules: recursive
     - name: 安装MSBuild
       uses: microsoft/setup-msbuild@v2
     - name: 构建RL real
@@ -60,6 +60,6 @@ jobs:
           rain-language-1.0.0.vsix
     - name: 构建RL arm android-19
       if: success()
-      run: msbuild RainLanguage\RainLanguage\RainLanguageSO.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
+      run: msbuild RainLanguage\RainLanguageSO\RainLanguageSO.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
       
     
