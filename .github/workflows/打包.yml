@@ -55,7 +55,7 @@ jobs:
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: RLVSCode扩展包
+        name: RL-VSCodeExtension
         path: rain-language-1.0.0.vsix
         retention-days: 1
         if-no-files-found: error
