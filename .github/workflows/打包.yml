@@ -58,8 +58,5 @@ jobs:
         name: RLVSCode扩展包
         path:
           rain-language-1.0.0.vsix
-    - name: 构建RL arm android-19
-      if: success()
-      run: msbuild RainLanguage\RainLanguageSO\RainLanguageSO.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
       
     
