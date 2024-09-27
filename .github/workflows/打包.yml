@@ -16,15 +16,15 @@ jobs:
       if: success()
       run: |
         msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-        msbuild RainLanguage\RainLanguage\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-        msbuild RainLanguage\RainLanguage\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        msbuild RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        msbuild RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
   
     - name: 构建RL fixed
       if: success()
       run: |
         msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
-        msbuild RainLanguage\RainLanguage\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
-        msbuild RainLanguage\RainLanguage\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+        msbuild RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+        msbuild RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
     - name: 构建Injector
       if: success()
       run: msbuild RainLanguage\RainLanguage\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
