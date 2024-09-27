@@ -48,9 +48,9 @@ jobs:
     - name: 构建VSC扩展包
       if: success()
       run: |
-        npm install
-        npm run tsc -b
-        npm run vsce package
+        npm run 安装依赖
+        npm run 编译
+        npm run 打包
     - name: 上传vscode扩展包
       if: success()
       uses: actions/upload-artifact@v4

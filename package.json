@@ -32,8 +32,8 @@
     },
     "main": "./out/extension.js",
     "scripts": {
-        "编译": "tsc -b",
         "安装依赖": "npm install",
+        "编译": "tsc -b",
         "打包": "vsce package",
         "发布": "vsce publish"
     },
