@@ -12,20 +12,18 @@ jobs:
       uses: microsoft/setup-msbuild@v2
     - name: 构建RL
       run: |
-      cd RainLanguage
-      msbuild RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-      msbuild RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
-      msbuild RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-      msbuild RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
-      msbuild RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-      msbuild RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
-      msbuild RainDebuggerInjector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-      
-      msbuild RainLanguageSO.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-      
-      msbuild RainLanguageServer.csproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=AnyCPU
-
-      cd ..
+        msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+        msbuild RainLanguage\RainLanguage\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        msbuild RainLanguage\RainLanguage\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+        msbuild RainLanguage\RainLanguage\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        msbuild RainLanguage\RainLanguage\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+        msbuild RainLanguage\RainLanguage\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        
+        msbuild RainLanguage\RainLanguage\RainLanguageSO.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+        
+        msbuild RainLanguageServer\RainLanguageServer\RainLanguageServer.csproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=AnyCPU
+  
 
     - name: 安装Node.js
       if: success()
