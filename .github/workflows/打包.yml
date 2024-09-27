@@ -16,14 +16,6 @@ jobs:
       if: success()
       run: |
         msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
-    - name: 诊断构建
-      if: success()
-      run: |
-        msbuild RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
-      
-    - name: 构建
-      if: success()
-      run: |
         msbuild RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
         msbuild RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
   
@@ -33,9 +25,10 @@ jobs:
         msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:m -property:Configuration=ReleaseFixed -property:Platform=x64
         msbuild RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:m -property:Configuration=ReleaseFixed -property:Platform=x64
         msbuild RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:m -property:Configuration=ReleaseFixed -property:Platform=x64
+    
     - name: 构建Injector
       if: success()
-      run: msbuild RainLanguage\RainLanguage\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
+      run: msbuild RainLanguage\RainDebuggerInjector\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=x64
 
     - name: 安装NuGet
       if: success()
