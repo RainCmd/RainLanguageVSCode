@@ -11,19 +11,19 @@ jobs:
     - name: 安装MSBuild
       uses: microsoft/setup-msbuild@v2
     - name: 构建RL rls real
-      run: msbuild .\RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      run: msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
       
     - name: 构建RL rls fixed
       if: success()
-      run: msbuild .\RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+      run: msbuild RainLanguage\RainLanguage\RainLanguage.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
       
     - name: 构建RLDectector rls real
       if: success()
-      run: msbuild .\RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      run: msbuild RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
       
     - name: 构建RLDectector rls fixed
       if: success()
-      run: msbuild .\RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+      run: msbuild RainLanguage\RainDebuggerDetector\RainDebuggerDetector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
       
     - name: 构建RLLauncher rls real
       if: success()
@@ -31,19 +31,19 @@ jobs:
       
     - name: 构建RLLauncher rls fixed
       if: success()
-      run: msbuild .\RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
+      run: msbuild RainLanguage\RainLauncher\RainLauncher.vcxproj -t:rebuild -verbosity:diag -property:Configuration=ReleaseFixed -property:Platform=x64
       
     - name: 构建RLInjector rls
       if: success()
-      run: msbuild .\RainLanguage\RainDebuggerInjector\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      run: msbuild RainLanguage\RainDebuggerInjector\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
       
     - name: 构建RL arm android-19 rls
       if: success()
-      run: msbuild .\RainLanguage\RainLanguageSO\RainLanguageSO.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
+      run: msbuild RainLanguage\RainLanguageSO\RainLanguageSO.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x64
     
     - name: 构建RLServer rls
       if: success()
-      run: msbuild .\RainLanguageServer\RainLanguageServer\RainLanguageServer.csproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=AnyCPU
+      run: msbuild RainLanguageServer\RainLanguageServer\RainLanguageServer.csproj -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=AnyCPU
     
     - name: 安装Node.js
       if: success()
