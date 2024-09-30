@@ -1,7 +1,7 @@
 
 import { DocumentRangeFormattingEditProvider, OnTypeFormattingEditProvider, FormattingOptions, CancellationToken, TextEdit, TextDocument, Range, Position, ProviderResult } from 'vscode';
 
-export function MatchPairingCharacter(line: string, start: number, char?: string): number{
+function MatchPairingCharacter(line: string, start: number, char?: string): number{
     if (char == null) {
         let ss = line.indexOf("\'", start)
         let ds = line.indexOf("\"", start)

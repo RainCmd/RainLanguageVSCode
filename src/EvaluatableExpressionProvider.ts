@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'
-import { MatchPairingCharacter } from './formatterProvider'
 
 const cc__ = '_'.charCodeAt(0)
 const cc_a = 'a'.charCodeAt(0)
@@ -43,18 +42,6 @@ export class RainEvaluatableExpressionProvider implements vscode.EvaluatableExpr
     }
     provideEvaluatableExpression(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.ProviderResult<vscode.EvaluatableExpression> {
         const line = document.lineAt(position.line)
-        let pos = MatchPairingCharacter(line.text, 0)
-        if (position.character >= pos) {
-            while (pos >= 0) {
-                let end = MatchPairingCharacter(line.text, pos + 1, line.text[pos])
-                if (position.character < pos) {
-                    break
-                } else if (position.character <= end) {
-                    return this.CreateExpression(position.line, pos, end + 1, document.fileName)
-                }
-                pos = MatchPairingCharacter(line.text, end + 1)
-            }
-        }
         const range = MatchToken(line.text, position.character)
         return this.CreateExpression(position.line, range.start, range.end, document.fileName)
     }
