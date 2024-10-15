@@ -34,3 +34,8 @@ rmdir /s /q temp
 ::构建Injector
 %msbuild% RainLanguage\RainDebuggerInjector\RainDebuggerInjector.vcxproj -t:rebuild -verbosity:m -property:Configuration=%CONFIG% -property:Platform=x64 -property:IntermediateOutputPath=..\..\temp\
 rmdir /s /q temp
+
+::如果是release，则顺便把RainLanguageServer也构建了
+if "%~1"=="-r" (
+    %msbuild% RainLanguageServer\RainLanguageServer\RainLanguageServer.csproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=AnyCPU
+)
