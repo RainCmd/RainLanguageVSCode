@@ -1,14 +1,18 @@
 {
     "files.exclude":{
+        "bin":true,
         "out":true,
         "node_modules":true,
+        "temp":true,
         "RainLanguageServer/**/bin":true,
         "RainLanguageServer/**/obj":true,
         "RainLanguage/**/x64":true
     },
     "search.exclude": {
+        "bin":true,
         "out":true,
         "node_modules":true,
+        "temp":true,
         "RainLanguageServer/**/bin":true,
         "RainLanguageServer/**/obj":true,
         "RainLanguage/**/x64":true
