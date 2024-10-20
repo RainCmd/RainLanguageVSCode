@@ -68,7 +68,7 @@ export class RainDebugSession extends LoggingDebugSession {
 		super();
 	}
 	private GetRelativePath(value: string): string {
-		return value.substring(this.configuration.projectPath.length).replace(/^[\\/]*/gi, "")
+		return value.substring(this.configuration.projectPath.length).replace(/^[\\/]*/gi, "").replace(/[\\/]+/gi, "/")
 	}
 	protected attachRequest(response: DebugProtocol.AttachResponse, args: DebugProtocol.AttachRequestArguments, request?: DebugProtocol.Request): void {
 		console.log("attach")
