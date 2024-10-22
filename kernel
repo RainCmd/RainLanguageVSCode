@@ -93,6 +93,8 @@
 		public Resume()
 	public class array handle
 		public integer GetLength()
+		public handle GetElement(integer index)
+		public SetElement(integer index, handle element)
 
 	public bool < (integer, integer)
 	public bool < (real, real)
