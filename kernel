@@ -214,7 +214,7 @@
 
 		public integer Abs(integer)
 		public integer Clamp(integer, integer, integer)
-		public integer GetRandomInt()
+		public integer GetRandomInt()			//[-max, max]
 		public integer Max(integer, integer)
 		public integer Min(integer, integer)
 		public real Abs(real)
@@ -227,7 +227,7 @@
 		public real Clamp01(real)
 		public real Cos(real)
 		public integer Floor(real)
-		public real GetRandomReal()
+		public real GetRandomReal()				//[0, 1)
 		public real Lerp(real, real, real)
 		public real Max(real, real)
 		public real Min(real, real)
