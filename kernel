@@ -80,6 +80,7 @@
 		public integer GetHandleID()
 		public type GetType()
 	public class Delegate handle
+		public handle[] Invoke(handle[] parameters)
 	public class Task handle
 		public Start(bool immediately, bool ignoreWait)
 		public Abort()
@@ -91,6 +92,7 @@
 		public bool IsPause()
 		public Pause()
 		public Resume()
+		public handle[] GetResults()
 	public class array handle
 		public integer GetLength()
 		public handle GetElement(integer index)
@@ -289,7 +291,6 @@
 		public Reflection.Assembly[] GetAssembles()
 		public integer GetCurrentTaskInstantID()
 		public string CreateString(char[], integer start, integer count)
-		public string GetName(type)
 
 	namespace Reflection
 		public enum TypeCode
