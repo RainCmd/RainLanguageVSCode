@@ -219,7 +219,7 @@
         "grammars": [
             {
                 "language": "雨言",
-                "scopeName": "source.雨言",
+                "scopeName": "source.rain-language",
                 "path": "./rain.tmLanguage.json"
             }
         ],
