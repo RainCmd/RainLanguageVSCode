@@ -69,7 +69,7 @@
     },
     {
       "match": "\\b(true|false|null)\\b",
-      "name": "constant.language"
+      "name": "constant.language.boolean"
     },
     {
       "match": "\\b(var|bool|byte|char|integer|real|real2|real3|real4|type|string|handle|entity|delegate|task|array)\\b",
