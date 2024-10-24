@@ -35,7 +35,7 @@
     {
       "begin": "'",
       "end": "'",
-      "name": "constant.numeric",
+      "name": "entity.name.section",
       "patterns": [
         {
           "match": "(\\\\\"|\\\\'|\\\\b|\\\\f|\\\\n|\\\\r|\\\\t|\\\\v|\\\\0|\\\\x..|\\\\u....)",
