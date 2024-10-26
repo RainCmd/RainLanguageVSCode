@@ -16,7 +16,7 @@ export const rainLanguageDocScheme = "rain-language"
 export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.executeCommand("setContext", "extensionDebug", extensionDebug)
     const documentSelector: vscode.DocumentSelector = {
-        language: '雨言',
+        language: 'RainLanguage',
     };
     kernelStateViewProvider = new KernelStateViewProvider(context.extensionUri)
     context.subscriptions.push(
@@ -24,20 +24,20 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerOnTypeFormattingEditProvider(documentSelector, new FormatProvider(), '\n', ';'),
         vscode.languages.registerEvaluatableExpressionProvider(documentSelector, new RainEvaluatableExpressionProvider()),
 
-        vscode.debug.registerDebugConfigurationProvider("雨言调试运行", new RainDebugConfigurationProvider(context)),
-        vscode.debug.registerDebugAdapterDescriptorFactory("雨言调试运行", new InlineDebugAdapterFactory()),
+        vscode.debug.registerDebugConfigurationProvider("RainLanguage调试运行", new RainDebugConfigurationProvider(context)),
+        vscode.debug.registerDebugAdapterDescriptorFactory("RainLanguage调试运行", new InlineDebugAdapterFactory()),
         vscode.commands.registerCommand("cmd.rain.debug", () =>
             vscode.debug.startDebugging(undefined, {
-                type: "雨言调试运行",
+                type: "RainLanguage调试运行",
                 name: "调试",
                 request: "launch"
             })),
 
-        vscode.debug.registerDebugConfigurationProvider("雨言附加到进程", new RainDebugConfigurationProvider(context)),
-        vscode.debug.registerDebugAdapterDescriptorFactory("雨言附加到进程", new InlineDebugAdapterFactory()),
+        vscode.debug.registerDebugConfigurationProvider("RainLanguage附加到进程", new RainDebugConfigurationProvider(context)),
+        vscode.debug.registerDebugAdapterDescriptorFactory("RainLanguage附加到进程", new InlineDebugAdapterFactory()),
         vscode.commands.registerCommand('cmd.rain.attach', () =>
             vscode.debug.startDebugging(undefined, {
-                type: "雨言附加到进程",
+                type: "RainLanguage附加到进程",
                 name: "附加到进程",
                 request: "attach"
             })),
@@ -55,7 +55,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
         vscode.commands.registerCommand('cmd.rain.execute', (fullname) =>
             vscode.debug.startDebugging(undefined, {
-                type: "雨言调试运行",
+                type: "RainLanguage调试运行",
                 name: "调试",
                 request: "launch",
                 execute: fullname

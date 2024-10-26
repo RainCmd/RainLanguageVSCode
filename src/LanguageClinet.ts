@@ -75,7 +75,7 @@ export async function StartServer(context: vscode.ExtensionContext) {
     const imports = await CollectImports()
     const clientOptions: LanguageClientOptions = {
         documentSelector: [{
-            language: "雨言"
+            language: "RainLanguage"
         }],
         synchronize: {
             fileEvents: vscode.workspace.createFileSystemWatcher("**/*.rain")
@@ -86,12 +86,12 @@ export async function StartServer(context: vscode.ExtensionContext) {
             imports: imports
         }
     }
-    client = new LanguageClient("雨言", "雨言服务客户端", serverOptions, clientOptions)
+    client = new LanguageClient("RainLanguage", "Rain语言服务", serverOptions, clientOptions)
     client.onRequest("rainlanguage/loadRely", LoadRely)
     client.start().then(() => {
-        console.log("雨言服务客户端：启动")
+        console.log("RainLanguage服务客户端：启动")
     }).catch((error) => {
-        console.log("雨言服务客户端：启动失败:" + error)
+        console.log("RainLanguage服务客户端：启动失败:" + error)
         client = null
     })
 }
@@ -105,7 +105,7 @@ export async function GetSemanticTokens(document: vscode.TextDocument, token: vs
 
 export function StopServer() {
     if (client) {
-        console.log("雨言服务客户端：终止")
+        console.log("RainLanguage服务客户端：终止")
         client.stop()
         client = null
     }

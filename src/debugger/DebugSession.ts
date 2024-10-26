@@ -229,7 +229,7 @@ export class RainDebugSession extends LoggingDebugSession {
 		const req = new client.Writer(client.Proto.RRECV_Initialized)
 		req.WriteUint(114514)
 		this.helper.Request(114514, req).then(res => {
-			if (this.configuration.type == "雨言调试运行") {
+			if (this.configuration.type == "RainLanguage调试运行") {
 				RainDebug.debuggedProcess.stdin.write('y')
 				RainDebug.debuggedProcess.stdin.end();
 			}

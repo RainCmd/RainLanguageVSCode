@@ -38,4 +38,6 @@ rmdir /s /q temp
 ::如果是release，则顺便把RainLanguageServer也构建了
 if "%~1"=="-r" (
     %msbuild% RainLanguageServer\RainLanguageServer\RainLanguageServer.csproj -t:rebuild -verbosity:m -property:Configuration=Release -property:Platform=AnyCPU
+    npm run build
+    npm run package
 )

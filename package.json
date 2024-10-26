@@ -1,9 +1,9 @@
 {
     "name": "rain-language",
-    "displayName": "雨言",
-    "description": "对雨言提供语言服务和调试功能",
+    "displayName": "RainLanguage",
+    "description": "Provides language services and debugging functions for RainLanguage",
     "version": "1.0.0",
-    "publisher": "RainCmd",
+    "publisher": "rain-cmd",
     "engines": {
         "vscode": "^1.28.0"
     },
@@ -32,10 +32,10 @@
     },
     "main": "./out/extension.js",
     "scripts": {
-        "安装依赖": "npm install",
-        "编译": "tsc -b",
-        "打包": "vsce package",
-        "发布": "vsce publish"
+        "dependencies": "npm install",
+        "build": "tsc -b",
+        "package": "vsce package",
+        "publish": "vsce publish"
     },
     "devDependencies": {
         "@types/node": "^17.0.21",
@@ -51,13 +51,12 @@
     "contributes": {
         "languages": [
             {
-                "id": "雨言",
+                "id": "RainLanguage",
                 "extensions": [
                     ".rain"
                 ],
                 "aliases": [
-                    "RainLanguage",
-                    "雨言"
+                    "RainLanguage"
                 ],
                 "icon": {
                     "dark": "./images/rain-dark.png",
@@ -70,19 +69,19 @@
             "editor/title/run": [
                 {
                     "command": "cmd.rain.debug",
-                    "when": "resourceLangId == 雨言 && !inDebugMode"
+                    "when": "resourceLangId == RainLanguage && !inDebugMode"
                 },
                 {
                     "command": "cmd.rain.attach",
-                    "when": "resourceLangId == 雨言 && !inDebugMode"
+                    "when": "resourceLangId == RainLanguage && !inDebugMode"
                 },
                 {
                     "command": "cmd.rain.kernel-document",
-                    "when": "resourceLangId == 雨言"
+                    "when": "resourceLangId == RainLanguage"
                 },
                 {
                     "command": "cmd.rain.restart-language-server",
-                    "when": "resourceLangId == 雨言 && extensionDebug"
+                    "when": "resourceLangId == RainLanguage && extensionDebug"
                 }
             ]
         },
@@ -104,19 +103,19 @@
             },
             {
                 "command": "cmd.rain.restart-language-server",
-                "title": "重启雨言服务",
+                "title": "重启语言服务",
                 "icon": "$(debug-restart)"
             }
         ],
         "snippets": [
             {
-                "language": "雨言",
+                "language": "RainLanguage",
                 "path": "./snippets.json"
             }
         ],
         "breakpoints": [
             {
-                "language": "雨言"
+                "language": "RainLanguage"
             }
         ],
         "debuggers": [
@@ -126,9 +125,9 @@
                         "label": "RainLanguage: 调试运行",
                         "description": "一个可以调试运行RainLanguage的启动配置",
                         "body": {
-                            "name": "雨言调试运行",
+                            "name": "RainLanguage调试运行",
                             "request": "launch",
-                            "type": "雨言调试运行",
+                            "type": "RainLanguage调试运行",
                             "EntryPoint": "Main",
                             "ErrorLevel": 4,
                             "Fixed": false,
@@ -137,7 +136,7 @@
                         }
                     }
                 ],
-                "type": "雨言调试运行",
+                "type": "RainLanguage调试运行",
                 "label": "直接运行并调试",
                 "configurationAttributes": {
                     "launch": {
@@ -184,16 +183,16 @@
                         "label": "RainLanguage: 附加到进程",
                         "description": "对运行在其他进程的虚拟机进行调试的配置",
                         "body": {
-                            "name": "雨言附加到进程",
+                            "name": "RainLanguage附加到进程",
                             "request": "attach",
-                            "type": "雨言附加到进程",
+                            "type": "RainLanguage附加到进程",
                             "ProjectName": "RainTest",
                             "Fixed": false
                         }
                     }
                 ],
-                "type": "雨言附加到进程",
-                "label": "附加到其他进程，对进程中运行的雨言进行调试",
+                "type": "RainLanguage附加到进程",
+                "label": "附加到其他进程，对进程中运行的RainLanguage进行调试",
                 "configurationAttributes": {
                     "attach": {
                         "required": [
@@ -218,7 +217,7 @@
         ],
         "grammars": [
             {
-                "language": "雨言",
+                "language": "RainLanguage",
                 "scopeName": "source.rain-language",
                 "path": "./rain.tmLanguage.json"
             }
@@ -228,7 +227,8 @@
                 {
                     "id": "RainKernelState",
                     "name": "虚拟机状态视图",
-                    "type": "webview"
+                    "type": "webview",
+                    "when": "resourceLangId == RainLanguage && inDebugMode"
                 }
             ]
         }
