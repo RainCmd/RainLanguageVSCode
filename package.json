@@ -69,41 +69,41 @@
         "menus": {
             "editor/title/run": [
                 {
-                    "command": "cmd.雨言调试",
+                    "command": "cmd.rain.debug",
                     "when": "resourceLangId == 雨言 && !inDebugMode"
                 },
                 {
-                    "command": "cmd.附加到进程",
+                    "command": "cmd.rain.attach",
                     "when": "resourceLangId == 雨言 && !inDebugMode"
                 },
                 {
-                    "command": "cmd.核心库定义",
+                    "command": "cmd.rain.kernel-document",
                     "when": "resourceLangId == 雨言"
                 },
                 {
-                    "command": "cmd.debug.重启雨言服务",
+                    "command": "cmd.rain.restart-language-server",
                     "when": "resourceLangId == 雨言 && extensionDebug"
                 }
             ]
         },
         "commands": [
             {
-                "command": "cmd.雨言调试",
+                "command": "cmd.rain.debug",
                 "title": "调试",
                 "icon": "$(debug-alt)"
             },
             {
-                "command": "cmd.附加到进程",
+                "command": "cmd.rain.attach",
                 "title": "附加到进程",
                 "icon": "$(sort-precedence)"
             },
             {
-                "command": "cmd.核心库定义",
+                "command": "cmd.rain.kernel-document",
                 "title": "核心库定义",
                 "icon": "$(remote-explorer-documentation)"
             },
             {
-                "command": "cmd.debug.重启雨言服务",
+                "command": "cmd.rain.restart-language-server",
                 "title": "重启雨言服务",
                 "icon": "$(debug-restart)"
             }

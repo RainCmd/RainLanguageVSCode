@@ -41,8 +41,7 @@ async function CompletionConfiguration(configuration: RainDebugConfiguration) {
         vscode.window.showErrorMessage("解析配置文件时出现错误：" + error)
      }
      if (IsNUllOrEmpty(configuration.projectName)) {
-         vscode.window.showInformationMessage("获取当前工程名失败，将使用工作空间文件夹名作为工程名")
-         configuration.projectName = path.dirname(configuration.projectPath)
+         configuration.projectName = "RainTest"
     }
     configuration.detectorName = "RainDebuggerDetector.dll";
 }
@@ -158,7 +157,7 @@ async function GetLaunchParam(configuration: RainDebugConfiguration) {
     const exeFile = configuration.detectorPath + "/RainLauncher.exe";
     const name = configuration.projectName
     const errLvl = configuration.ErrorLevel || 4
-    const entry = configuration.EntryPoint || "Main"
+    const entry = configuration.execute || configuration.EntryPoint || "Main"
     const timestep = configuration.Timestep || 1
     
     let result: string[] = [];

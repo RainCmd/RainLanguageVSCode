@@ -26,38 +26,48 @@ export async function activate(context: vscode.ExtensionContext) {
 
         vscode.debug.registerDebugConfigurationProvider("雨言调试运行", new RainDebugConfigurationProvider(context)),
         vscode.debug.registerDebugAdapterDescriptorFactory("雨言调试运行", new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand("cmd.雨言调试", () => {
+        vscode.commands.registerCommand("cmd.rain.debug", () =>
             vscode.debug.startDebugging(undefined, {
                 type: "雨言调试运行",
                 name: "调试",
                 request: "launch"
-            })
-        }),
+            })),
 
         vscode.debug.registerDebugConfigurationProvider("雨言附加到进程", new RainDebugConfigurationProvider(context)),
         vscode.debug.registerDebugAdapterDescriptorFactory("雨言附加到进程", new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand('cmd.附加到进程', () => {
+        vscode.commands.registerCommand('cmd.rain.attach', () =>
             vscode.debug.startDebugging(undefined, {
                 type: "雨言附加到进程",
                 name: "附加到进程",
                 request: "attach"
-            })
-        }),
+            })),
 
         vscode.window.registerWebviewViewProvider("RainKernelState", kernelStateViewProvider),
 
-        vscode.commands.registerCommand('cmd.核心库定义', async () => {
-            vscode.window.showTextDocument(vscode.Uri.parse(`${rainLanguageDocScheme}:${kernelFileName}.rain`))
-        }),
+        vscode.commands.registerCommand('cmd.rain.kernel-document', async () => vscode.window.showTextDocument(vscode.Uri.parse(`${rainLanguageDocScheme}:${kernelFileName}.rain`))),
         vscode.workspace.registerTextDocumentContentProvider(rainLanguageDocScheme, {
             provideTextDocumentContent: function (uri: vscode.Uri) { return langugaePreviewDoc.get(uri.path) }
         }),
 
-        vscode.commands.registerCommand('cmd.debug.重启雨言服务', () => rainLanguageClient.RestartServer(context)),
+        vscode.commands.registerCommand('cmd.rain.restart-language-server', () => rainLanguageClient.RestartServer(context)),
 
-        vscode.languages.registerDocumentSemanticTokensProvider(documentSelector, new SemanticTokenProvider(), legend)
+        vscode.languages.registerDocumentSemanticTokensProvider(documentSelector, new SemanticTokenProvider(), legend),
+
+        vscode.commands.registerCommand('cmd.rain.execute', (fullname) =>
+            vscode.debug.startDebugging(undefined, {
+                type: "雨言调试运行",
+                name: "调试",
+                request: "launch",
+                execute: fullname
+            })),
+        vscode.commands.registerCommand('cmd.rain.peek-reference', (position) => {
+            if(vscode.window.activeTextEditor != null){
+                vscode.window.activeTextEditor.selection = new vscode.Selection(position, position)
+            }
+            vscode.commands.executeCommand("editor.action.referenceSearch.trigger")
+        })
     );
-
+    
     readFile(context.extensionPath + "/" + kernelFileName, (error, data) => {
         if (error) {
             console.log(error)
