@@ -24,7 +24,7 @@
     {
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double",
+      "name": "string",
       "patterns": [
         {
           "match": "(\\\\\"|\\\\'|\\\\b|\\\\f|\\\\n|\\\\r|\\\\t|\\\\v|\\\\0|\\\\x..|\\\\u....)",
@@ -35,7 +35,7 @@
     {
       "begin": "'",
       "end": "'",
-      "name": "entity.name.section",
+      "name": "string.quoted",
       "patterns": [
         {
           "match": "(\\\\\"|\\\\'|\\\\b|\\\\f|\\\\n|\\\\r|\\\\t|\\\\v|\\\\0|\\\\x..|\\\\u....)",
@@ -77,7 +77,7 @@
     },
     {
       "match": "\\b(namespace|import|native|public|internal|space|protected|private|enum|struct|class|interface|const)\\b",
-      "name": "storage.modifier"
+      "name": "keyword"
     },
     {
       "match": "\\=|\\&|\\&\\&|\\&\\=|\\||\\|\\||\\|\\=|\\^|\\^\\=|<|<\\=|<<|<<\\=|>|>\\=|>>|>>\\=|\\+|\\+\\+|\\+\\=|-|--|-\\=|->|\\*|\\*\\=|/|/\\=|%|%\\=|!|!\\=|`|\\?|:|\\.|\\bis\\b|\\bas\\b|\\band\\b|\\bor\\b",
