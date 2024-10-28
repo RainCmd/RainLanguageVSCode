@@ -26,21 +26,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
         vscode.debug.registerDebugConfigurationProvider("RainLanguage调试运行", new RainDebugConfigurationProvider(context)),
         vscode.debug.registerDebugAdapterDescriptorFactory("RainLanguage调试运行", new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand("cmd.rain.debug", () =>
-            vscode.debug.startDebugging(undefined, {
-                type: "RainLanguage调试运行",
-                name: "调试",
-                request: "launch"
-            })),
 
         vscode.debug.registerDebugConfigurationProvider("RainLanguage附加到进程", new RainDebugConfigurationProvider(context)),
         vscode.debug.registerDebugAdapterDescriptorFactory("RainLanguage附加到进程", new InlineDebugAdapterFactory()),
-        vscode.commands.registerCommand('cmd.rain.attach', () =>
-            vscode.debug.startDebugging(undefined, {
-                type: "RainLanguage附加到进程",
-                name: "附加到进程",
-                request: "attach"
-            })),
 
         vscode.window.registerWebviewViewProvider("RainKernelState", kernelStateViewProvider),
 

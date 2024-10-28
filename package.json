@@ -68,14 +68,6 @@
         "menus": {
             "editor/title/run": [
                 {
-                    "command": "cmd.rain.debug",
-                    "when": "resourceLangId == RainLanguage && !inDebugMode"
-                },
-                {
-                    "command": "cmd.rain.attach",
-                    "when": "resourceLangId == RainLanguage && !inDebugMode"
-                },
-                {
                     "command": "cmd.rain.kernel-document",
                     "when": "resourceLangId == RainLanguage"
                 },
@@ -86,16 +78,6 @@
             ]
         },
         "commands": [
-            {
-                "command": "cmd.rain.debug",
-                "title": "调试",
-                "icon": "$(debug-alt)"
-            },
-            {
-                "command": "cmd.rain.attach",
-                "title": "附加到进程",
-                "icon": "$(sort-precedence)"
-            },
             {
                 "command": "cmd.rain.kernel-document",
                 "title": "核心库定义",
