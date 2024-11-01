@@ -15,9 +15,10 @@
         "Debuggers"
     ],
     "keywords": [
-        "RainLanguage",
-        "debugg",
-        "languageserver"  
+        "rainlanguage",
+        "debuggers",
+        "languageserver",
+        "gamedevelop"
     ],
     "activationEvents": [
         "onDebug"
