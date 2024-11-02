@@ -93,10 +93,11 @@
 		public Pause()
 		public Resume()
 		public handle[] GetResults()
-	public class array handle
+	public class array handle Enumerable
 		public integer GetLength()
 		public handle GetElement(integer index)
 		public SetElement(integer index, handle element)
+		public Collections.Enumerator GetEnumerator()
 
 	public bool < (integer, integer)
 	public bool < (real, real)
@@ -291,6 +292,16 @@
 		public Reflection.Assembly[] GetAssembles()
 		public integer GetCurrentTaskInstantID()
 		public string CreateString(char[], integer start, integer count)
+
+	namespace Collections
+		public interface Enumerable
+			Enumerator GetEnumerator()
+		public interface Enumerator
+			bool, handle Next()
+		public class ArrayEnumerator Enumerator
+			private handle source
+			private integer index
+			public bool, handle Next()
 
 	namespace Reflection
 		public enum TypeCode
