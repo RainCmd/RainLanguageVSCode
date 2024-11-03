@@ -39,25 +39,25 @@
 		public real Magnitude()
 		public real SqrMagnitude()
 	public struct enum
-		public string ToString() Declaration									//函数名后的Declaration是编译器添加的参数，对用户透明
+		public string ToString() Declaration							//函数名后的Declaration是编译器添加的参数，对用户透明
 	public struct type
 		public bool IsPublic()
-		public Reflection.ReadonlyStrings GetAttributes()
+		public string[] GetAttributes()
 		public string GetName()
 		public type GetParent()
-		public Reflection.ReadonlyTypes GetInherits()
-		public Reflection.ReadonlyMemberConstructors GetConstructors()			//只返回当前类型中定义的构造函数
-		public Reflection.ReadonlyMemberVariables GetVariables()				//只返回当前类型中定义的字段
-		public Reflection.ReadonlyMemberFunctions GetFunctions()				//只返回当前类型中定义的函数
+		public type[] GetInherits()
+		public Reflection.MemberConstructor[] GetConstructors()			//只返回当前类型中定义的构造函数
+		public Reflection.MemberVariable[] GetVariables()				//只返回当前类型中定义的字段
+		public Reflection.MemberFunction[] GetFunctions()				//只返回当前类型中定义的函数
 		public Reflection.Space GetSpace()
 		public Reflection.TypeCode GetTypeCode()
-		public bool IsAssignable(type)											//判断当前类型的对象是否可赋值给目标类型的变量
+		public bool IsAssignable(type)									//判断当前类型的对象是否可赋值给目标类型的变量
 		public bool IsValid()
 		public integer[] GetEnumElements()
 		public string[] GetEnumElementNames()
-		public Reflection.ReadonlyTypes GetParameters()							//委托的参数类型列表
-		public Reflection.ReadonlyTypes GetReturns()							//委托或任务的返回值类型列表
-		public handle CreateUninitialized()										//创建该类型的未初始化对象
+		public type[] GetParameters()									//委托的参数类型列表
+		public type[] GetReturns()										//委托或任务的返回值类型列表
+		public handle CreateUninitialized()								//创建该类型的未初始化对象
 		public Delegate CreateDelegate(Reflection.Function)													//创建全局函数的委托对象，返回当前类型的委托对象
 		public Delegate CreateDelegate(Reflection.Native)													//创建本地函数的委托对象，返回当前类型的委托对象
 		public Delegate CreateDelegate(Reflection.MemberFunction, handle target)							//创建成员函数的委托对象，返回当前类型的委托对象
@@ -93,7 +93,7 @@
 		public Pause()
 		public Resume()
 		public handle[] GetResults()
-	public class array handle Enumerable
+	public class array handle Collections.Enumerable
 		public integer GetLength()
 		public handle GetElement(integer index)
 		public SetElement(integer index, handle element)
@@ -323,109 +323,61 @@
 			Delegate
 			Task
 			Array
-		public class ReadonlyStrings
-			private string[] values
-			public string GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyTypes
-			private type[] values
-			public type GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyVariables
-			private Variable[] values
-			public Variable GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyMemberConstructors
-			private MemberConstructor[] values
-			public MemberConstructor GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyMemberVariables
-			private MemberVariable[] values
-			public MemberVariable GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyMemberFunctions
-			private MemberFunction[] values
-			public MemberFunction GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyFunctions
-			private Function[] values
-			public Function GetElement(integer)
-			public integer GetCount()
-		public class ReadonlyNatives
-			private Native[] values
-			public Native GetElement(integer)
-			public integer GetCount()
-		public class ReadonlySpaces
-			private Space[] values
-			public Space GetElement(integer)
-			public integer GetCount()
+			
 		public class Variable
 			public bool IsPublic()
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public Space GetSpace()
 			public string GetName()
 			public type GetVariableType()
 			public handle GetValue()
 			public SetValue(handle)
 		public class MemberConstructor
-			private ReadonlyTypes parameters
 			public bool IsPublic()
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public type GetDeclaringType()
-			public ReadonlyTypes GetParameters()
+			public type[] GetParameters()
 			public handle Invoke(handle[])
 		public class MemberVariable
 			public bool IsPublic()
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public type GetDeclaringType()
 			public string GetName()
 			public type GetVariableType()
 			public handle GetValue(handle)
 			public SetValue(handle, handle)
 		public class MemberFunction
-			private ReadonlyTypes parameters
-			private ReadonlyTypes returns
 			public bool IsPublic()
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public type GetDeclaringType()
 			public string GetName()
-			public ReadonlyTypes GetParameters()
-			public ReadonlyTypes GetReturns()
+			public type[] GetParameters()
+			public type[] GetReturns()
 			public handle[] Invoke(handle, handle[])
 		public class Function
-			private ReadonlyTypes parameters
-			private ReadonlyTypes returns
 			public bool IsPublic()
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public Space GetSpace()
 			public string GetName()
-			public ReadonlyTypes GetParameters()
-			public ReadonlyTypes GetReturns()
+			public type[] GetParameters()
+			public type[] GetReturns()
 			public handle[] Invoke(handle[])
 		public class Native
-			private ReadonlyTypes parameters
-			private ReadonlyTypes returns
 			public bool IsPublic()
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public Space GetSpace()
 			public string GetName()
-			public ReadonlyTypes GetParameters()
-			public ReadonlyTypes GetReturns()
+			public type[] GetParameters()
+			public type[] GetReturns()
 			public handle[] Invoke(handle[])
 		public class Space
-			private ReadonlyStrings attributes
-			private ReadonlySpaces children
-			private ReadonlyTypes types
-			private ReadonlyVariables variables
-			private ReadonlyFunctions functions
-			private ReadonlyNatives natives
-			public ReadonlyStrings GetAttributes()
+			public string[] GetAttributes()
 			public Space GetParent()
-			public ReadonlySpaces GetChildren()
+			public Space[] GetChildren()
 			public Assembly GetAssembly()
 			public string GetName()
-			public ReadonlyVariables GetVariables()
-			public ReadonlyFunctions GetFunctions()
-			public ReadonlyNatives GetNatives()
-			public ReadonlyTypes GetTypes()
+			public Variable[] GetVariables()
+			public Function[] GetFunctions()
+			public Native[] GetNatives()
+			public type[] GetTypes()
 		public class Assembly Space
