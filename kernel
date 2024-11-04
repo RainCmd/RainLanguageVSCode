@@ -60,9 +60,9 @@
 		public handle CreateUninitialized()								//创建该类型的未初始化对象
 		public Delegate CreateDelegate(Reflection.Function)													//创建全局函数的委托对象，返回当前类型的委托对象
 		public Delegate CreateDelegate(Reflection.Native)													//创建本地函数的委托对象，返回当前类型的委托对象
-		public Delegate CreateDelegate(Reflection.MemberFunction, handle target)							//创建成员函数的委托对象，返回当前类型的委托对象
+		public Delegate CreateDelegate(Reflection.MemberFunction, handle target, bool realCall)				//创建成员函数的委托对象，返回当前类型的委托对象
 		public Task CreateTask(Reflection.Function function, handle[] parameters)							//创建一个任务，返回当前类型的任务对象
-		public Task CreateTask(Reflection.MemberFunction function, handle target, handle[] parameters)		//创建一个任务，返回当前类型的任务对象
+		public Task CreateTask(Reflection.MemberFunction function, handle target, handle[] parameters, bool realCall)		//创建一个任务，返回当前类型的任务对象
 		public array CreateArray(integer legnth)
 		public integer GetArrayRank()
 		public type GetArrayElementType()
@@ -281,6 +281,8 @@
 			public const string IgnoreWaitButTaskNotCompleted
 			public const string AllocHeapMemoryOnGC
 			public const string HeapOverflow
+			public const string InvalidOperation
+			public const string InvalidReflection
 
 		public integer Collect(bool)
 		public integer HeapTotalMemory()
@@ -324,49 +326,55 @@
 			Task
 			Array
 			
-		public class Variable
-			public bool IsPublic()
+		public struct Variable
+			bool isPublic
+			Space owningSpace
+			string name
+			type variableType 
+
 			public string[] GetAttributes()
-			public Space GetSpace()
-			public string GetName()
-			public type GetVariableType()
 			public handle GetValue()
 			public SetValue(handle)
-		public class MemberConstructor
-			public bool IsPublic()
+		public struct MemberConstructor
+			bool isPublic
+			type declaringType
+
 			public string[] GetAttributes()
-			public type GetDeclaringType()
 			public type[] GetParameters()
 			public handle Invoke(handle[])
-		public class MemberVariable
-			public bool IsPublic()
+		public struct MemberVariable
+			bool isPublic
+			type declaringType
+			string name
+			type variableType 
+
 			public string[] GetAttributes()
-			public type GetDeclaringType()
-			public string GetName()
-			public type GetVariableType()
 			public handle GetValue(handle)
 			public SetValue(handle, handle)
-		public class MemberFunction
-			public bool IsPublic()
+		public struct MemberFunction
+			bool isPublic
+			type declaringType
+			string name
+
 			public string[] GetAttributes()
-			public type GetDeclaringType()
-			public string GetName()
 			public type[] GetParameters()
 			public type[] GetReturns()
-			public handle[] Invoke(handle, handle[])
-		public class Function
-			public bool IsPublic()
+			public handle[] Invoke(handle, handle[], bool realCall)
+		public struct Function
+			bool isPublic
+			Space owningSpace
+			string name
+
 			public string[] GetAttributes()
-			public Space GetSpace()
-			public string GetName()
 			public type[] GetParameters()
 			public type[] GetReturns()
 			public handle[] Invoke(handle[])
-		public class Native
-			public bool IsPublic()
+		public struct Native
+			bool isPublic
+			Space owningSpace
+			string name
+
 			public string[] GetAttributes()
-			public Space GetSpace()
-			public string GetName()
 			public type[] GetParameters()
 			public type[] GetReturns()
 			public handle[] Invoke(handle[])
