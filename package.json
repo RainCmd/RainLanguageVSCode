@@ -214,6 +214,32 @@
                     "when": "resourceLangId == RainLanguage && inDebugMode"
                 }
             ]
-        }
+        },
+        "configuration":[
+            {
+                "title": "RainLanguage",
+                "type": "object",
+                "properties": {
+                    "rain.showInlayHint":{
+                        "type":"boolean",
+                        "default":true,
+                        "scope": "RainLanguageServer",
+                        "description": "显示嵌入提示信息"
+                    },
+                    "rain.showVariableCodeLens":{
+                        "type":"boolean",
+                        "default":false,
+                        "scope": "RainLanguageServer",
+                        "description": "显示全局变量的引用信息"
+                    },
+                    "rain.showFieldCodeLens":{
+                        "type":"boolean",
+                        "default":false,
+                        "scope": "RainLanguageServer",
+                        "description": "显示成员字段的引用信息"
+                    }
+                }
+            }
+        ]
     }
 }
