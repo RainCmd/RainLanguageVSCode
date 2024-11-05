@@ -24,11 +24,11 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerOnTypeFormattingEditProvider(documentSelector, new FormatProvider(), '\n', ';'),
         vscode.languages.registerEvaluatableExpressionProvider(documentSelector, new RainEvaluatableExpressionProvider()),
 
-        vscode.debug.registerDebugConfigurationProvider("RainLanguage调试运行", new RainDebugConfigurationProvider(context)),
-        vscode.debug.registerDebugAdapterDescriptorFactory("RainLanguage调试运行", new InlineDebugAdapterFactory()),
+        vscode.debug.registerDebugConfigurationProvider("rain.launch", new RainDebugConfigurationProvider(context)),
+        vscode.debug.registerDebugAdapterDescriptorFactory("rain.launch", new InlineDebugAdapterFactory()),
 
-        vscode.debug.registerDebugConfigurationProvider("RainLanguage附加到进程", new RainDebugConfigurationProvider(context)),
-        vscode.debug.registerDebugAdapterDescriptorFactory("RainLanguage附加到进程", new InlineDebugAdapterFactory()),
+        vscode.debug.registerDebugConfigurationProvider("rain.attach", new RainDebugConfigurationProvider(context)),
+        vscode.debug.registerDebugAdapterDescriptorFactory("rain.attach", new InlineDebugAdapterFactory()),
 
         vscode.window.registerWebviewViewProvider("RainKernelState", kernelStateViewProvider),
 
@@ -43,7 +43,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
         vscode.commands.registerCommand('cmd.rain.execute', (fullname) =>
             vscode.debug.startDebugging(undefined, {
-                type: "RainLanguage调试运行",
+                type: "rain.launch",
                 name: "调试",
                 request: "launch",
                 execute: fullname

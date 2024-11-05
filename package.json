@@ -108,9 +108,9 @@
                         "label": "RainLanguage: 调试运行",
                         "description": "一个可以调试运行RainLanguage的启动配置",
                         "body": {
-                            "name": "RainLanguage调试运行",
+                            "name": "调试运行",
                             "request": "launch",
-                            "type": "RainLanguage调试运行",
+                            "type": "rain.launch",
                             "EntryPoint": "Main",
                             "ErrorLevel": 4,
                             "Fixed": false,
@@ -119,7 +119,7 @@
                         }
                     }
                 ],
-                "type": "RainLanguage调试运行",
+                "type": "rain.launch",
                 "label": "直接运行并调试",
                 "configurationAttributes": {
                     "launch": {
@@ -166,15 +166,15 @@
                         "label": "RainLanguage: 附加到进程",
                         "description": "对运行在其他进程的虚拟机进行调试的配置",
                         "body": {
-                            "name": "RainLanguage附加到进程",
+                            "name": "附加到进程",
                             "request": "attach",
-                            "type": "RainLanguage附加到进程",
+                            "type": "rain.attach",
                             "ProjectName": "RainTest",
                             "Fixed": false
                         }
                     }
                 ],
-                "type": "RainLanguage附加到进程",
+                "type": "rain.attach",
                 "label": "附加到其他进程，对进程中运行的RainLanguage进行调试",
                 "configurationAttributes": {
                     "attach": {

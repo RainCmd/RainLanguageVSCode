@@ -243,7 +243,7 @@ export class RainDebugConfigurationProvider implements vscode.DebugConfiguration
             configuration.projectPath = folder.uri.fsPath;
         } else return undefined;
         if (configuration.noDebug) {
-            configuration.type = "RainLanguage调试运行"
+            configuration.type = "rain.launch"
         }
         if (debuggedProcess != null && !debuggedProcess.killed && debuggedProcess.exitCode == null) {
             debuggedProcess.kill()
@@ -267,7 +267,7 @@ export class RainDebugConfigurationProvider implements vscode.DebugConfiguration
         } else {
             const injector = `${configuration.detectorPath}/RainDebuggerInjector.exe`
             switch (configuration.type) {
-                case "RainLanguage调试运行": {
+                case "rain.launch": {
                     if (intervalId != null) {
                         clearInterval(intervalId)
                     }
@@ -316,7 +316,7 @@ export class RainDebugConfigurationProvider implements vscode.DebugConfiguration
                     debuggedProcess.stdin.end();
                     return undefined
                 }
-                case "RainLanguage附加到进程": {
+                case "rain.attach": {
                     currentOutputChannel = GetOutputChannel(configuration.projectName + `[附加到进程]`);
 
                     const pid = await pickPID(injector)
