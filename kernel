@@ -1,5 +1,4 @@
 ﻿namespace kernel
-	public const type InvalidType
 	public enum TaskState
 		Unstart
 		Running
@@ -344,6 +343,7 @@
 			string name
 			type variableType 
 
+			public bool IsValid()
 			public string[] GetAttributes()
 			public handle GetValue()
 			public SetValue(handle)
@@ -351,6 +351,7 @@
 			bool isPublic
 			type declaringType
 
+			public bool IsValid()
 			public string[] GetAttributes()
 			public type[] GetParameters()
 			public handle Invoke(handle[])
@@ -360,6 +361,7 @@
 			string name
 			type variableType 
 
+			public bool IsValid()
 			public string[] GetAttributes()
 			public handle GetValue(handle)
 			public SetValue(handle, handle)
@@ -368,6 +370,7 @@
 			type declaringType
 			string name
 
+			public bool IsValid()
 			public string[] GetAttributes()
 			public type[] GetParameters()
 			public type[] GetReturns()
@@ -377,6 +380,7 @@
 			Space owningSpace
 			string name
 
+			public bool IsValid()
 			public string[] GetAttributes()
 			public type[] GetParameters()
 			public type[] GetReturns()
@@ -386,6 +390,7 @@
 			Space owningSpace
 			string name
 
+			public bool IsValid()
 			public string[] GetAttributes()
 			public type[] GetParameters()
 			public type[] GetReturns()
