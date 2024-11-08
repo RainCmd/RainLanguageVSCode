@@ -155,6 +155,16 @@
                                 "type": "boolean",
                                 "description": "使用定点数计算",
                                 "default": false
+                            },
+                            "ReferencePath": {
+                                "type": "string",
+                                "description": "引用的dll和pdb存放的路径，多个路径用';'分隔",
+                                "default": ""
+                            },
+                            "OutPath": {
+                                "type": "string",
+                                "description": "生成的dll和pdb存放的位置",
+                                "default": ""
                             }
                         }
                     }
@@ -192,6 +202,16 @@
                                 "type": "boolean",
                                 "description": "使用定点数计算",
                                 "default": false
+                            },
+                            "ReferencePath": {
+                                "type": "string",
+                                "description": "引用的dll和pdb存放的路径，多个路径用';'分隔",
+                                "default": ""
+                            },
+                            "OutPath": {
+                                "type": "string",
+                                "description": "生成的dll和pdb存放的位置",
+                                "default": ""
                             }
                         }
                     }

@@ -14,10 +14,12 @@ export interface RainDebugConfiguration extends vscode.DebugConfiguration{
     detectorName: string
     projectPath: string
     projectName: string
+    referencePath: string
     EntryPoint: string
     Timestep: number
     ErrorLevel: number
     Fixed: boolean
+    outPath: string
 }
 
 function IsNUllOrEmpty(value: string): boolean{
@@ -32,9 +34,11 @@ async function CompletionConfiguration(configuration: RainDebugConfiguration) {
             if (element.type == configuration.type) {
                 configuration.projectName = element.ProjectName || configuration.projectName
                 configuration.EntryPoint = element.EntryPoint || configuration.EntryPoint
+                configuration.referencePath = element.ReferencePath || configuration.referencePath
                 configuration.Timestep = element.Timestep || configuration.Timestep
                 configuration.ErrorLevel = element.ErrorLevel || configuration.ErrorLevel
                 configuration.Fixed = element.Fixed || configuration.Fixed
+                configuration.outPath = element.OutPath || configuration.outPath
             }
         });
     } catch (error) {
@@ -166,12 +170,20 @@ async function GetLaunchParam(configuration: RainDebugConfiguration) {
     result.push(configuration.projectPath)
     result.push("-name")
     result.push(name)
+    if(configuration.referencePath){
+        result.push("-referencePath")
+        result.push(configuration.referencePath)
+    }
     result.push("-errorlevel")
     result.push(errLvl.toString())
     result.push("-entry")
     result.push(entry)
     result.push("-timestep")
     result.push(timestep.toString())
+    if(configuration.outPath){
+        result.push("-out")
+        result.push(configuration.outPath)
+    }
     return result
 }
 
