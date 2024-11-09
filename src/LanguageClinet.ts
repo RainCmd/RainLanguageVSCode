@@ -3,7 +3,9 @@ import { LanguageClient, LanguageClientOptions, ServerOptions, StreamInfo } from
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as net from 'net'
+import * as cp from 'child_process'
 import { RegistRainLanguagePreviewDoc, extensionDebug, kernelFileName, rainLanguageDocScheme } from './extension';
+import { RainDebugConfiguration } from './debugger/DebugConfigurationProvider';
 
 let client: LanguageClient;
 
@@ -29,15 +31,77 @@ async function GetProjectName(): Promise<string | null> {
     return null
 }
 
-async function CollectImports(): Promise<string[]> {
-    //todo 收集当前工作区可用的dll路径
-    return []
+let libraries : string[] = []
+const libraryDirMap : Map<string, string> = new Map()
+async function RefreshReferences() {
+    try {
+        if(vscode.workspace.workspaceFolders.length > 0){
+            const projectPath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+            const data = await fs.promises.readFile(projectPath + "/.vscode/launch.json", 'utf-8')
+            const cfgs = JSON.parse(data).configurations
+            const referencePaths = []
+            cfgs.forEach((element: RainDebugConfiguration) => {
+                if (element.type == 'rain.attach' || element.type == 'rain.launch') {
+                    if(element.ReferencePath){
+                        element.ReferencePath.split(';').forEach((value: string) => {
+                            if(value.startsWith('.')){
+                                referencePaths.push(projectPath + '/' + value)
+                            }
+                            else{
+                                referencePaths.push(value)
+                            }
+                        })
+                    }
+                }
+            });
+            referencePaths.forEach(dir => {
+                const files = fs.readdirSync(dir, {withFileTypes : true})
+                files.forEach(file=>{
+                    if(file.isFile()){
+                        if(file.name.endsWith('.rdll')) {
+                            const name = file.name.substring(0, file.name.length - 5)
+                            libraries.push(name)
+                            libraryDirMap.set(name, dir)
+                        }
+                    }
+                })
+            })
+        }
+    } catch (error) {
+        vscode.window.showErrorMessage("解析配置文件时出现错误：" + error)
+    }
 }
+
+let extensionPath : string
 async function LoadRely(rely: string): Promise<string> {
-    //todo 参数rely是CollectImports传给服务的内容，返回类似kernel.rain的字符串内容
-    let result = ""
-    RegistRainLanguagePreviewDoc(`${rainLanguageDocScheme}:${rely}.rain`, result)
-    return result
+    return new Promise<string>((resolve, reject) =>{
+        const path = libraryDirMap.get(rely)
+        if(path){
+            const params : string[] = []
+            params.push("-path")
+            params.push(extensionPath + "/LoadRely")
+            params.push("-name")
+            params.push("__LoadRely__")
+            params.push("-entry")
+            params.push("__LoadRely__.Main")
+            params.push("-referencePath")
+            params.push(path)
+            params.push("-forcedReference")
+            params.push(rely)
+            params.push("-silent")
+            const p = cp.execFile(extensionPath + "/bin/float/RainLauncher.exe", params)
+            let content = ""
+            p.stdout.on('data', (data : Buffer) => {
+                content += data.toString()
+            }).on('close', ()=>{
+                RegistRainLanguagePreviewDoc(`${rainLanguageDocScheme}:${rely}.rain`, content)
+                resolve(content)
+            })
+        }
+        else{
+            reject("路径查找失败")
+        }
+    })
 }
 
 function GetCPServerOptions(context: vscode.ExtensionContext): ServerOptions {
@@ -70,9 +134,9 @@ function GetSocketServerOperation() {
 
 export async function StartServer(context: vscode.ExtensionContext) {
     const serverOptions = extensionDebug ? GetSocketServerOperation : GetCPServerOptions(context)
-    
+    extensionPath = context.extensionUri.fsPath
     const projectName = await GetProjectName()
-    const imports = await CollectImports()
+    await RefreshReferences()
     const clientOptions: LanguageClientOptions = {
         documentSelector: [{
             language: "RainLanguage"
@@ -83,7 +147,7 @@ export async function StartServer(context: vscode.ExtensionContext) {
         initializationOptions: {
             kernelDefinePath: `${context.extension.extensionUri.fsPath}/${kernelFileName}`,
             projectName: projectName,
-            imports: imports
+            imports: libraries
         }
     }
     client = new LanguageClient("RainLanguage", "Rain语言服务", serverOptions, clientOptions)

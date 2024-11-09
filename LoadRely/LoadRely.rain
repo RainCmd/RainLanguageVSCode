@@ -1,0 +1,129 @@
+import kernel
+import kernel.Reflection
+
+native Print(string)
+
+Print(string value, integer indent)
+    while indent-- > 0
+        value = "    " + value
+    Print(value + "\n")
+
+string GetFullName(type t)
+    if t.GetTypeCode() == TypeCode.Array
+        return $"{GetFullName(t.GetArrayElementType())}[]"
+
+    var s = t.GetSpace()
+    var a = s.GetAssembly()
+    if s == a and s.GetName() == "kernel"
+        return t.GetName()
+    else
+        var name = t.GetName()
+        while s != null
+            name = $"{s.GetName()}.{name}"
+            s = s.GetParent()
+        return name
+
+string GetTuple(type[] tuple)
+    var result = ""
+    for type t : tuple
+        if result != ""
+            result += ", "
+        result += GetFullName(t)
+    return result
+
+GenMemberCtor(type t, integer indent)
+    for MemberConstructor ctor : t.GetConstructors()
+        if ctor.isPublic
+            Print($"public {t.GetName()}({GetTuple(ctor.GetParameters())})", indent)
+GenMemberVar(type t, integer indent)
+    for MemberVariable variable : t.GetVariables()
+        if variable.isPublic
+            if t.GetTypeCode() == TypeCode.Struct
+                Print($"{GetFullName(variable.variableType)} {variable.name}", indent)
+            else
+                Print($"public {GetFullName(variable.variableType)} {variable.name}", indent)
+GenMemberFunc(type t, integer indent)
+    for MemberFunction func : t.GetFunctions()
+        if func.isPublic
+            var rets = func.GetReturns()
+            if rets.GetLength() > 0
+                Print($"public {GetTuple(rets)} {func.name}({GetTuple(func.GetParameters())})", indent)
+            else
+                Print($"public {func.name}({GetTuple(func.GetParameters())})", indent)
+
+GenType(type t, integer indent)
+    var code = t.GetTypeCode()
+    if code == TypeCode.Enum
+        Print($"public enum {t.GetName()}", indent)
+        indent++
+        var names = t.GetEnumElementNames()
+        var values = t.GetEnumElements()
+        for var i = 0; i < names.GetLength(); i++
+            Print($"public {names[i]} = {values[i]}", indent)
+    elseif code == TypeCode.Struct
+        Print($"public struct {t.GetName()}", indent)
+        indent++
+        GenMemberVar(t, indent)
+        GenMemberFunc(t, indent)
+        
+    elseif code == TypeCode.Interface
+        Print($"public interface {t.GetName()}", indent)
+        indent++
+        GenMemberFunc(t, indent)
+    elseif code == TypeCode.Handle
+        Print($"public class {t.GetName()}", indent)
+        indent++
+        GenMemberCtor(t, indent)
+        GenMemberVar(t, indent)
+        GenMemberFunc(t, indent)
+    elseif code == TypeCode.Delegate
+        var rets = t.GetReturns()
+        if rets.GetLength() > 0
+            Print($"public delegate {GetTuple(rets)} {t.GetName()}({t.GetParameters()})", indent)
+        else
+            Print($"public delegate {t.GetName()}({GetTuple(t.GetParameters())})", indent)
+    elseif code == TypeCode.Task
+        var rets = t.GetReturns()
+        if rets.GetLength() > 0
+            Print($"public task {GetTuple(rets)} {t.GetName()}", indent)
+        else
+            Print($"public task {t.GetName()}", indent)
+
+
+GenSpace(Space s, integer indent)
+    Print($"namespace {s.GetName()}", indent)
+    indent++
+    for Space child : s.GetChildren()
+        GenSpace(child, indent)
+    for Variable variable : s.GetVariables()
+        if variable.isPublic
+            if variable.readonly
+                Print($"public const {variable.variableType.GetName()}", indent)
+            else
+                Print($"public {variable.variableType.GetName()}", indent)
+    for Function func : s.GetFunctions()
+        if func.isPublic
+            var rets = func.GetReturns()
+            if rets.GetLength() > 0
+                Print($"public {GetTuple(rets)} {func.name}({GetTuple(func.GetParameters())})", indent)
+            else
+                Print($"public {func.name}({GetTuple(func.GetParameters())})", indent)
+    for Native nat : s.GetNatives()
+        if nat.isPublic
+            var rets = nat.GetReturns()
+            if rets.GetLength() > 0
+                Print($"public native {GetTuple(rets)} {nat.name}({GetTuple(nat.GetParameters())})", indent)
+            else
+                Print($"public native {nat.name}({GetTuple(nat.GetParameters())})", indent)
+    for type t : s.GetTypes()
+        if t.IsPublic()
+            GenType(t, indent)
+
+GenAssemble(Assembly assembly)
+    GenSpace(assembly, 0)
+
+Main(string rely)
+    for Assembly assembly : kernel.System.GetAssembles()
+        if assembly.GetName() == rely
+            GenAssemble(assembly)
+            break

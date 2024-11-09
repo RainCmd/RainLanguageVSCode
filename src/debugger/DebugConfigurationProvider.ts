@@ -157,7 +157,7 @@ async function Connect(port:number) {
     })
 }
 
-async function GetLaunchParam(configuration: RainDebugConfiguration) {
+function GetLaunchParam(configuration: RainDebugConfiguration) {
     const exeFile = configuration.detectorPath + "/RainLauncher.exe";
     const name = configuration.projectName
     const errLvl = configuration.ErrorLevel || 4
@@ -268,7 +268,7 @@ export class RainDebugConfigurationProvider implements vscode.DebugConfiguration
             configuration.detectorPath = this.context.extensionUri.fsPath + "/bin/float/";
         }
         if (configuration.noDebug) {
-            const launchParams = await GetLaunchParam(configuration)
+            const launchParams = GetLaunchParam(configuration)
             const outputChannel = GetOutputChannel(configuration.projectName + "[RainLanguage]");
             debuggedProcess = cp.execFile(launchParams[0], launchParams.slice(1)).on('error', error => {
                 vscode.window.showErrorMessage(error.message)
@@ -295,7 +295,7 @@ export class RainDebugConfigurationProvider implements vscode.DebugConfiguration
                         statusBarItem.text = `${configuration.projectName} 编译中，已用时${compileTime}s`
                     }, 1000);
                     
-                    const launchParams = await GetLaunchParam(configuration)
+                    const launchParams = GetLaunchParam(configuration)
                     launchParams.push("-debug")
                     currentOutputChannel = GetOutputChannel(configuration.projectName + "[调试]");
 

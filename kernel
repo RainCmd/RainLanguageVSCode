@@ -319,6 +319,7 @@
 	namespace Reflection
 		public enum TypeCode
 			Invalid
+			Struct
 			Bool
 			Byte
 			Char
@@ -338,6 +339,7 @@
 			Array
 			
 		public struct Variable
+			bool readonly
 			bool isPublic
 			Space owningSpace
 			string name
@@ -356,6 +358,7 @@
 			public type[] GetParameters()
 			public handle Invoke(handle[])
 		public struct MemberVariable
+			bool readonly
 			bool isPublic
 			type declaringType
 			string name
