@@ -117,11 +117,14 @@ async function pickPID(injector: string) {
 
 async function GetDetectorPort(injector: string, pid: number, detectorPath: string, detectorName: string, projectPath: string, projectName: string) {
     return new Promise<number>((resolve, reject) => {
-        const cmd = `"${injector}" ${pid} "${detectorPath}" "${detectorName}" "${projectPath}" "${projectName}"`
+        const cmd = `"${injector}" ${pid} "${detectorPath}" "${detectorName}" "${projectPath}" "${projectName}" `
         cp.exec(cmd, { encoding: "buffer" }, (error, stdout, stderr) => {
-            const result = iconv.decode(stdout, "cp936").trim();
+            let result = iconv.decode(stdout, "cp936").trim();
             const port = parseInt(result, 10);
             if (Number.isNaN(port)) {
+                if (result == "") {
+                    result = "\n" + iconv.decode(stderr, 'cp936').trim();
+                }
                 vscode.window.showErrorMessage("调试器dll注入失败:" + result)
                 reject()
             }
