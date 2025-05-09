@@ -2,7 +2,7 @@
     "name": "rain-language",
     "displayName": "RainLanguage",
     "description": "Provides language services and debugging functions for RainLanguage",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publisher": "rain-cmd",
     "engines": {
         "vscode": "^1.28.0"
